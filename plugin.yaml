@@ -1,0 +1,28 @@
+plugin:
+    name: 'hendrikerz.campaignr::lang.plugin.name'
+    description: 'hendrikerz.campaignr::lang.plugin.description'
+    author: 'Hendrik Erz'
+    icon: oc-icon-bullhorn
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: 'hendrikerz.campaignr::lang.plugin.name'
+        url: hendrikerz/campaignr/events
+        icon: icon-bullhorn
+        sideMenu:
+            event-create:
+                label: 'hendrikerz.campaignr::lang.plugin.create'
+                url: 'hendrikerz/campaignr/events/create'
+                icon: icon-plus
+            event-list:
+                label: 'hendrikerz.campaignr::lang.plugin.events'
+                url: hendrikerz/campaignr/events
+                icon: icon-list
+            event-calendar:
+                label: 'hendrikerz.campaignr::lang.plugin.calendar'
+                url: 'hendrikerz/campaignr/calendar'
+                icon: icon-calendar
+permissions:
+    campaignr.events.edit:
+        tab: 'hendrikerz.campaignr::lang.permissions.tab'
+        label: 'hendrikerz.campaignr::lang.permissions.edit'

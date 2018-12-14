@@ -1,0 +1,71 @@
+columns:
+    name:
+        label: 'hendrikerz.campaignr::lang.fields.name'
+        type: text
+        searchable: true
+        sortable: true
+    time_begin:
+        label: 'hendrikerz.campaignr::lang.fields.begins_at'
+        type: date
+        sortable: true
+    time_end:
+        label: 'hendrikerz.campaignr::lang.fields.ends_at'
+        type: date
+        sortable: true
+    repeat_event:
+        label: 'hendrikerz.campaignr::lang.fields.should_repeat'
+        type: switch
+    location_city:
+        label: 'hendrikerz.campaignr::lang.fields.location.city'
+        type: text
+        searchable: true
+        sortable: true
+    end_repeat_on:
+        label: 'hendrikerz.campaignr::lang.fields.end_repeat'
+        type: date
+        sortable: true
+    id:
+        label: ID
+        type: number
+        invisible: true
+        sortable: true
+    description:
+        label: 'hendrikerz.campaignr::lang.fields.description'
+        type: text
+        invisible: true
+    location_zip:
+        label: 'hendrikerz.campaignr::lang.fields.location.zip'
+        type: text
+        invisible: true
+    location_street:
+        label: 'hendrikerz.campaignr::lang.fields.location.street'
+        type: text
+        invisible: true
+    location_country:
+        label: 'hendrikerz.campaignr::lang.fields.location.country'
+        type: text
+        sortable: true
+    location_number:
+        label: 'hendrikerz.campaignr::lang.fields.location.number'
+        type: text
+        invisible: true
+    location_misc:
+        label: 'hendrikerz.campaignr::lang.fields.location.misc'
+        type: text
+        invisible: true
+    created_at:
+        label: 'Created on'
+        type: datetime
+        invisible: true
+    updated_at:
+        label: 'Updated on'
+        type: datetime
+        invisible: true
+    deleted_at:
+        label: 'Deleted on'
+        type: datetime
+        invisible: true
+    slug:
+        label: Slug
+        type: text
+        invisible: true

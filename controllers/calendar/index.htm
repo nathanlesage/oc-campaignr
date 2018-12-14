@@ -1,0 +1,96 @@
+<?php
+$currentDate = Carbon\Carbon::createFromDate($year, $month, 1); // Carbon\Carbon::now();
+$year = $currentDate->year;
+$month = $currentDate->englishMonth;
+$monthNum = $currentDate->month;
+$daysInMonth = $currentDate->daysInMonth;
+$startDow = $currentDate->dayOfWeekIso; // We preset currentDate with the 1st day already
+?>
+
+<!-- Year Navigation -->
+<div class="selector">
+  <form action="" method="GET">
+    Preview Month
+    <select name="month" class="form-control" style="width: 250px; display: inline-block;">
+      <option value="1" <?= ($month === 'January') ? 'selected="selected"' : '' ?>>January</option>
+      <option value="2" <?= ($month === 'February') ? 'selected="selected"' : '' ?>>February</option>
+      <option value="3" <?= ($month === 'March') ? 'selected="selected"' : '' ?>>March</option>
+      <option value="4" <?= ($month === 'April') ? 'selected="selected"' : '' ?>>April</option>
+      <option value="5" <?= ($month === 'May') ? 'selected="selected"' : '' ?>>May</option>
+      <option value="6" <?= ($month === 'June') ? 'selected="selected"' : '' ?>>June</option>
+      <option value="7" <?= ($month === 'July') ? 'selected="selected"' : '' ?>>July</option>
+      <option value="8" <?= ($month === 'August') ? 'selected="selected"' : '' ?>>August</option>
+      <option value="9" <?= ($month === 'September') ? 'selected="selected"' : '' ?>>September</option>
+      <option value="10" <?= ($month === 'October') ? 'selected="selected"' : '' ?>>October</option>
+      <option value="11" <?= ($month === 'November') ? 'selected="selected"' : '' ?>>November</option>
+      <option value="12" <?= ($month === 'December') ? 'selected="selected"' : '' ?>>December</option>
+    </select>
+    <input class="form-control" type="number" min="1900" max="2100" value="<?= $year; ?>" name="year" style="width: 100px; display:inline-block;">
+    <button class="btn btn-primary" type="submit">View</button>
+  </form>
+</div>
+
+<div class="campaignr-calendar">
+  <div class="thead">
+    <div class="tr">
+      <div class="th">Monday</div>
+      <div class="th">Tuesday</div>
+      <div class="th">Wednesday</div>
+      <div class="th">Thursday</div>
+      <div class="th">Friday</div>
+      <div class="th">Saturday</div>
+      <div class="th">Sunday</div>
+    </div>
+  </div>
+  <div class="tbody">
+    <div class="tr">
+      <?php $dow = $startDow; ?>
+      <?php $wom = 1; ?>
+      <?php for($day = 1; $day <= $daysInMonth; $day++): ?>
+        <?php if($day === 1): ?>
+          <?php if($startDow !== 1): ?>
+            <?php for($i = 0; $i < $startDow - 1; $i++): ?>
+              <div class="td empty"></div>
+            <?php endfor; ?>
+          <?php endif; ?>
+        <?php endif; ?>
+        <div class="td">
+          <div>
+            <?php $todaysDate = Carbon\Carbon::parse($year . '-' . $month . '-' . $day); ?>
+            <div class="day"><span class="campaignr-small"><?= $todaysDate->format('l N Y'); ?></span>
+              <span class="campaignr-big"><?= $day; ?></span></div>
+              <div class="events">
+                <?php foreach($events as $event): ?>
+                  <?php if($event->dom <= $day && $event->mon <= $monthNum && $event->year <= $year && $event->end_day >= $day && $event->end_mon >= $monthNum && $event->end_year >= $year): ?>
+                    <a href="<?= Backend::url('/hendrikerz/campaignr/events/update/' . $event->id); ?>"><?= $event->name; ?></a>
+                  <?php elseif($event->repeat_mode > 0 and date($event->time_begin) <= $todaysDate and date($event->end_repeat_on) >= $todaysDate): ?>
+                    <?php if($event->repeat_mode == 1
+                    || ($event->repeat_mode == 2 && $event->dow == $dow)
+                    || ($event->repeat_mode == 3 && $event->dow == $dow && $event->wom == $wom)
+                    || ($event->repeat_mode == 4 && $event->dom == $day && $event->mon == $monthNum)): ?>
+                      <a href="<?= Backend::url('/hendrikerz/campaignr/events/update/' . $event->id); ?>"><?= $event->name; ?></a>
+                    <?php endif; ?>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+          </div>
+        </div>
+        <?php if($day === $daysInMonth && $dow !== 7): ?>
+          <?php for($i = 1; $i <= (7 - $dow); $i++): ?>
+            <div class="td empty"></div>
+          <?php endfor; ?>
+        <?php endif; ?>
+        <?php
+        if($dow === 7):
+          $dow = 1;
+          $wom++;
+          ?>
+        </div>
+        <div class="tr">
+        <?php else: ?>
+          <?php $dow++; ?>
+        <?php endif; ?>
+      <?php endfor; // end for day in month ?>
+    </div>
+  </div>
+</div> <!-- END Table -->

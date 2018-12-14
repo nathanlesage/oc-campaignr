@@ -1,0 +1,108 @@
+fields:
+    name:
+        label: 'hendrikerz.campaignr::lang.fields.name'
+        span: auto
+        required: 1
+        type: text
+        tab: 'hendrikerz.campaignr::lang.fields.tab_details'
+    slug:
+        label: 'hendrikerz.campaignr::lang.fields.slug'
+        span: auto
+        required: 1
+        preset:
+            field: name
+            type: slug
+        type: text
+        tab: 'hendrikerz.campaignr::lang.fields.tab_details'
+    toolbar:
+        type: partial
+        path: event_toolbar
+        cssClass: collapse-visible
+secondaryTabs:
+    stretch: true
+    fields:
+        time_begin:
+            label: 'hendrikerz.campaignr::lang.fields.begins_at'
+            mode: datetime
+            span: auto
+            required: 1
+            type: datepicker
+            tab: 'hendrikerz.campaignr::lang.fields.tab_details'
+        repeat_event:
+            label: 'hendrikerz.campaignr::lang.fields.repeat'
+            span: auto
+            default: 0
+            required: 0
+            type: switch
+            comment: 'hendrikerz.campaignr::lang.fields.repeat_comment'
+            tab: 'hendrikerz.campaignr::lang.fields.tab_details'
+        time_end:
+            label: 'hendrikerz.campaignr::lang.fields.ends_at'
+            mode: datetime
+            span: auto
+            required: 1
+            type: datepicker
+            tab: 'hendrikerz.campaignr::lang.fields.tab_details'
+        repeat_mode:
+            label: 'hendrikerz.campaignr::lang.fields.repeat_mode'
+            options:
+                1: 'hendrikerz.campaignr::lang.fields.repeat_day'
+                2: 'hendrikerz.campaignr::lang.fields.repeat_week'
+                3: 'hendrikerz.campaignr::lang.fields.repeat_month'
+                4: 'hendrikerz.campaignr::lang.fields.repeat_year'
+            span: auto
+            hidden: 0
+            trigger:
+                action: show
+                field: repeat_event
+                condition: checked
+            type: balloon-selector
+            tab: 'hendrikerz.campaignr::lang.fields.tab_details'
+        end_repeat_on:
+            label: 'hendrikerz.campaignr::lang.fields.end_repeat'
+            mode: date
+            span: right
+            trigger:
+                action: show
+                field: repeat_event
+                condition: checked
+            type: datepicker
+            tab: 'hendrikerz.campaignr::lang.fields.tab_details'
+        description:
+            size: ''
+            mode: split
+            span: full
+            type: markdown
+            stretch: true
+            tab: 'hendrikerz.campaignr::lang.fields.description'
+        location_street:
+            label: 'hendrikerz.campaignr::lang.fields.location.street'
+            span: auto
+            type: text
+            tab: 'hendrikerz.campaignr::lang.fields.tab_location'
+        location_number:
+            label: 'hendrikerz.campaignr::lang.fields.location.number'
+            span: auto
+            type: text
+            tab: 'hendrikerz.campaignr::lang.fields.tab_location'
+        location_zip:
+            label: 'hendrikerz.campaignr::lang.fields.location.zip'
+            span: auto
+            type: text
+            tab: 'hendrikerz.campaignr::lang.fields.tab_location'
+        location_city:
+            label: 'hendrikerz.campaignr::lang.fields.location.city'
+            span: auto
+            type: text
+            tab: 'hendrikerz.campaignr::lang.fields.tab_location'
+        location_country:
+            label: 'hendrikerz.campaignr::lang.fields.location.country'
+            span: auto
+            type: text
+            tab: 'hendrikerz.campaignr::lang.fields.tab_location'
+        location_misc:
+            label: 'hendrikerz.campaignr::lang.fields.location.misc'
+            span: full
+            type: text
+            commentAbove: 'hendrikerz.campaignr::lang.fields.location.misc_comment'
+            tab: 'hendrikerz.campaignr::lang.fields.tab_location'

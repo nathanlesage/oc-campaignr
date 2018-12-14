@@ -1,0 +1,104 @@
+{# First we need some variables .#}
+{% set events = __SELF__.events %}
+
+{# Set some vars for ease of access that we need throughout the template #}
+{% set month = this.page.campaignrMonth %}
+{% set year = this.page.campaignrYear %}
+{% set current_date = month ~ ' ' ~ year %}
+{% set monthNum = current_date|date('n') %}
+
+{# Check out how many days are in this month #}
+{% set daysInMonth = current_date|date('t') %}
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h1>{{ 'Events'|_ }} <small>{{ month|_ }} {{ year }}</small></h1>
+    <p>
+      {% if __SELF__.property('icalPage') %}
+      <p>
+        <a class="btn btn-primary" href="{{ __SELF__.property('icalPage')|page }}">
+          {{ 'Subscribe to this calendar'|_ }}
+        </a>
+      </p>
+      {% endif %}
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 offset-md-3 mb-3 mt-3">
+    {% partial __SELF__~'::navigation' date=current_date %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 offset-md-3 mb-3 mt-3">
+    <div class="campaignr-calendar">
+      <div class="thead">
+        <div class="tr">
+          <div class="th">{{ 'Monday'|_ }}</div>
+          <div class="th">{{ 'Tuesday'|_ }}</div>
+          <div class="th">{{ 'Wednesday'|_ }}</div>
+          <div class="th">{{ 'Thursday'|_ }}</div>
+          <div class="th">{{ 'Friday'|_ }}</div>
+          <div class="th">{{ 'Saturday'|_ }}</div>
+          <div class="th">{{ 'Sunday'|_ }}</div>
+        </div>
+      </div>
+      <div class="tbody">
+        <div class="tr">
+          {# We're using N instead of w, b/c it follows correct work week #}
+          {% set startDow = current_date|date('F 1\\s\\t Y')|date('N') %}
+          {% set dow = startDow %}
+          {% set wom = 1 %}
+          {% for day in range(1,daysInMonth) %}
+          {% if loop.first %}
+          {# Fill up with empty cells #}
+          {% for i in range(1, startDow - 1) if startDow != 1 %}
+          <div class="td empty"></div>
+          {% endfor %}
+          {% endif %}
+          <div class="td">
+            <div>
+              {% set todaysDate = date(year ~ '-' ~ monthNum ~ '-' ~ day) %}
+              <div class="day"><span class="campaignr-small">{{ todaysDate|date('l') }}, {{ month|_ }} {{ day }}</span><span class="campaignr-big">{{ day }}</span></div>
+              <div class="events">
+                {# Now find all events on this date #}
+                {# Compute the current day's date once #}
+                {% for event in events %}
+                {% if event.dom <= day and event.mon <= monthNum and event.year <= year and event.end_day >= day and event.end_mon >= monthNum and event.end_year >= year %}
+                <a href="{{ __SELF__.property('eventPage')|page({ (__SELF__.property('eventSlug')): event.slug }) }}">{{ event.name }}</a>
+                {% else %}
+                {% if event.repeat_mode > 0 and date(event.time_begin) <= todaysDate and date(event.end_repeat_on) >= todaysDate %}
+                {# The event should still occur #}
+                {# Check whether it's time. Daily, Weekly, monthly or yearly #}
+                {% if event.repeat_mode == 1
+                or (event.repeat_mode == 2 and event.dow == dow)
+                or (event.repeat_mode == 3 and event.dow == dow and event.wom == wom)
+                or (event.repeat_mode == 4 and event.dom == day and event.mon == monthNum) %}
+                <a href="{{ __SELF__.property('eventPage')|page({ (__SELF__.property('eventSlug')): event.slug }) }}">{{ event.name }}</a>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% if loop.last and dow != 7 %}
+          {# Fill up with empty cells #}
+          {% for i in range(1, 7 - dow) if dow != 7 %}
+          <div class="td empty"></div>
+          {% endfor %}
+          {% endif %}
+          {% if dow == 7 %}
+          {% set dow = 1 %}
+          {% set wom = wom + 1 %}
+        </div>
+        <div class="tr">
+          {% else %}
+          {% set dow = dow + 1 %}
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div> <!-- END Table -->
+  </div>
+</div>

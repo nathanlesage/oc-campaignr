@@ -1,0 +1,10 @@
+name: Events
+modelClass: HendrikErz\Campaignr\Models\Event
+form: $/hendrikerz/campaignr/models/event/fields.yaml
+defaultRedirect: hendrikerz/campaignr/events
+create:
+    redirect: 'hendrikerz/campaignr/events/update/:id'
+    redirectClose: hendrikerz/campaignr/events
+update:
+    redirect: hendrikerz/campaignr/events
+    redirectClose: hendrikerz/campaignr/events

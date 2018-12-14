@@ -1,0 +1,13 @@
+{# Also set prev and next for the navigation #}
+{% set prev_month = (date ~ ' -1 month')|date('F') %}
+{% set prev_year = (date ~ ' -1 month')|date('Y') %}
+{% set next_month = (date ~ ' +1 month')|date('F') %}
+{% set next_year = (date ~ ' +1 month')|date('Y') %}
+
+<!-- Navigation to cycle through months -->
+<a class="btn btn-primary" href="{{ this.page.baseFileName|page({ (__SELF__.paramName('monthParam')): prev_month|lower, (__SELF__.paramName('yearParam')): prev_year}) }}">
+  &laquo; {{ prev_month|_ }} {{ prev_year }}
+</a>
+<a class="btn btn-primary" href="{{ this.page.baseFileName|page({ (__SELF__.paramName('monthParam')): next_month|lower, (__SELF__.paramName('yearParam')): next_year}) }}">
+  {{ next_month|_ }} {{ next_year }} &raquo;
+</a>

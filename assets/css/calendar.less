@@ -1,0 +1,64 @@
+/* Calendar CSS styles */
+
+div.campaignr-calendar {
+  width: 100%;
+  padding: 10px;
+
+  div.tr {
+    display: flex;
+  }
+
+  div.td, div.th {
+    flex: 1;
+    padding: 5px;
+    overflow-x: hidden;
+  }
+
+  div.thead {
+    font-weight: bold;
+  }
+
+  div.events a {
+    display: block;
+    white-space: nowrap;
+  }
+
+  // Helper classes
+  .campaignr-small { display: none; }
+  .campaignr-big { display: block; }
+}
+
+@media (max-width:768px) {
+  div.campaignr-calendar {
+    div.tr {
+      display: block;
+    }
+
+    div.td, div.th {
+      display: block;
+      width: 100%;
+      min-height: 10%;
+      border-bottom: 1px solid rgba(0, 0, 0, .3);
+      padding: 0px;
+    }
+
+    div.day {
+      background-color: rgba(0, 0, 0, .1);
+      padding: 5px;
+    }
+
+    div.events { padding: 5px; }
+
+    div.td.empty {
+      display: none;
+    }
+
+    div.thead {
+      display: none;
+    }
+
+    // Helper classes
+    .campaignr-small { display: inline-block; }
+    .campaignr-big { display: none; }
+  }
+}

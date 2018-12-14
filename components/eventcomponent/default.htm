@@ -1,0 +1,54 @@
+{% set event = __SELF__.event %}
+
+<h1>{{ event.name }}</h1>
+<p class="campaignr-event-date">
+  {% if event.repeat_event and event.repeat_mode > 0 %}
+    {{ 'Every'|_ }}
+    {% if event.repeat_mode == 1 %}
+    {{ 'day'|_ }},
+    {{ event.time_begin|date('G:i') }}
+    -{{ event.time_end|date('G:i') }}
+    {% endif %}
+    {% if event.repeat_mode == 2 %}
+    {{ event.time_begin|date('l')|_ }},
+    {{ event.time_begin|date('G:i') }}
+    - {{ event.time_end|date('G:i') }}
+    {% endif %}
+    {% if event.repeat_mode == 3 %}
+    {{ 'month'|_ }}
+    {{ event.time_begin|date('l') }},
+    {{ event.time_begin|date('G:i') }}
+    - {{ event.time_end|date('G:i') }}
+    {% endif %}
+    {% if event.repeat_mode == 4 %}
+    {{ 'year'|_ }}
+    {{ event.time_begin|date('F j, G:i') }}
+    - {{ event.time_end|date('F j, G:i') }}
+    {% endif %}
+  {% endif %}
+  {% if event.end_repeat_on %}
+  ({{ 'until'|_ }} {{ event.end_repeat_on|date('F j, Y')}})
+  {% endif %}
+</p>
+<p>{{ event.description|md }}</p>
+<h2>{{ 'Address'|_ }}</h2>
+<p>
+  {{ event.location_street }} {{ event.location_number }}<br>
+  {{ event.location_zip }} {{ event.location_city }}<br>
+  {{ event.location_country }}
+</p>
+{% if __SELF__.property('icalPage') %}
+<p>
+  <a class="btn btn-primary" href="{{ __SELF__.property('icalPage')|page({ (__SELF__.paramName('icalPageSlug')): event.slug }) }}">
+    {{ 'Add this event to your calendar'|_ }}
+  </a>
+</p>
+{% endif %}
+{% if __SELF__.property('calendarPage') %}
+<hr>
+<p>
+  <a class="btn btn-primary" href="{{ __SELF__.property('calendarPage')|page }}">
+    {{ 'Back to the calendar'|_ }}
+  </a>
+</p>
+{% endif %}

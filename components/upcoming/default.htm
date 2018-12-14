@@ -1,0 +1,10 @@
+{% set events = __SELF__.events %}
+<ul>
+    {% for event in events %}
+        <li>
+          <a href="{{ __SELF__.property('eventPage')|page({ (__SELF__.property('eventSlug')): event.slug }) }}">
+            <strong>{{ event.nextOccurrence|date('d.m.Y') }}, {{ event.time_begin|date('H:i') }}</strong>: {{ event.name }}
+          </a>
+        </li>
+    {% endfor %}
+</ul>

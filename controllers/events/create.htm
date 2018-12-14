@@ -1,0 +1,18 @@
+<?php if (!$this->fatalError): ?>
+
+  <div class="layout fancy-layout">
+    <?= Form::open([
+      'class' => 'layout',
+      'data-change-monitor' => 'true',
+      'data-window-close-confirm' => e(trans('hendrikerz.campaignr::lang.form.close_confirm')),
+      'id' => 'event-form'
+      ]) ?>
+      <?= $this->formRender() ?>
+
+      <?= Form::close() ?>
+    </div>
+
+  <?php else: ?>
+    <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+    <p><a href="<?= Backend::url('hendrikerz/campaignr/events') ?>" class="btn btn-default"><?= e(trans('backend::lang.form.return_to_list')) ?></a></p>
+  <?php endif ?>
