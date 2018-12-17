@@ -163,6 +163,13 @@ class Event extends Model
             return false; // Repetition has already stopped
         }
 
+        if ($beg > $now) {
+          // No matter what, the "next" occurrence is the actual beginning of
+          // the event.
+          $this->nextOccurrence = $beg->copy();
+          return true;
+        }
+
         // Calculate the next occurrence.
         if (!$this->repeat_event) {
           // It's currently happening, so simply write the current time into the
