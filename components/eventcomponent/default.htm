@@ -37,6 +37,11 @@
   {{ event.location_zip }} {{ event.location_city }}<br>
   {{ event.location_country }}
 </p>
+{% if event.location_misc %}
+<p>{{ event.location_misc }}</p>
+{% endif %}
+<p>
+</p>
 {% if __SELF__.property('icalPage') %}
 <p>
   <a class="btn btn-primary" href="{{ __SELF__.property('icalPage')|page({ (__SELF__.paramName('icalPageSlug')): event.slug }) }}">

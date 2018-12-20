@@ -10,20 +10,7 @@
 {# Check out how many days are in this month #}
 {% set daysInMonth = current_date|date('t') %}
 
-<div class="row">
-  <div class="col-md-6 offset-md-3">
-    <h1>{{ 'Events'|_ }} <small>{{ month|_ }} {{ year }}</small></h1>
-    <p>
-      {% if __SELF__.property('icalPage') %}
-      <p>
-        <a class="btn btn-primary" href="{{ __SELF__.property('icalPage')|page }}">
-          {{ 'Subscribe to this calendar'|_ }}
-        </a>
-      </p>
-      {% endif %}
-    </p>
-  </div>
-</div>
+{% partial __SELF__~'::header' month=month year=year %}
 <div class="row">
   <div class="col-md-6 offset-md-3 mb-3 mt-3">
     {% partial __SELF__~'::navigation' date=current_date %}

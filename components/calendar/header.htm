@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h1>{{ 'Events'|_ }} <small>{{ month|_ }} {{ year }}</small></h1>
+    <p>
+      {% if __SELF__.property('icalPage') %}
+      <p>
+        <a class="btn btn-primary" href="{{ __SELF__.property('icalPage')|page }}">
+          {{ 'Subscribe to this calendar'|_ }}
+        </a>
+      </p>
+      {% endif %}
+    </p>
+  </div>
+</div>
