@@ -25,6 +25,29 @@
     {{ event.time_begin|date('F j, G:i') }}
     - {{ event.time_end|date('F j, G:i') }}
     {% endif %}
+  {% else %}
+  {# The event does not repeat -> Display the date itself #}
+    {% if event.time_begin|date('Y') == event.time_end|date('Y') %}
+      {% if event.time_begin|date('F') == event.time_end|date('F') %}
+       {% if event.time_begin|date('j') == event.time_end|date('j') %}
+       {# This event is on one single day #}
+       {{ event.time_begin|date('F j Y, G:i') }}
+       - {{ event.time_end|date('G:i') }}
+       {% else %}
+       {# This event spans multiple days #}
+       {{ event.time_begin|date('F j Y, G:i') }}
+       - {{ event.time_end|date('j, G:i') }}
+       {% endif %}
+      {% else %}
+      {# This event spans two months #}
+      {{ event.time_begin|date('F j Y, G:i') }}
+      - {{ event.time_end|date('F j, G:i') }}
+      {% endif %}
+    {% else %}
+    {# This event spans multiple years #}
+    {{ event.time_begin|date('F j Y, G:i') }}
+    - {{ event.time_end|date('F j Y, G:i') }}
+    {% endif %}
   {% endif %}
   {% if event.end_repeat_on %}
   ({{ 'until'|_ }} {{ event.end_repeat_on|date('F j, Y')}})

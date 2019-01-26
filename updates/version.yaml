@@ -1,3 +1,5 @@
 1.0.0:
     - 'Initial release.'
     - builder_table_create_hendrikerz_campaignr_events.php
+1.0.1:
+    - 'Non-repeating events now display the event date and time.'
