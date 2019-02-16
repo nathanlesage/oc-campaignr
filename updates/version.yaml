@@ -3,3 +3,6 @@
     - builder_table_create_hendrikerz_campaignr_events.php
 1.0.1:
     - 'Non-repeating events now display the event date and time.'
+1.0.2:
+    - 'Make sure there is always a value for the repeat mode.'
+    - update_event_table20190216.php

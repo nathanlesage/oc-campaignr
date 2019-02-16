@@ -108,6 +108,11 @@ class Event extends Model
             $this->slugAttributes(); // Auto-generate a slug
         }
 
+        // Make sure at least the default for repeat_mode is inserted.
+        if (!$this->repeat_mode) {
+          $this->repeat_mode = 2;
+        }
+
         // October CMS uses this human-readable but programmatically weird
         // format for storing dates, so we have to transform it beforehand.
         // See https://octobercms.com/docs/database/mutators for the format.

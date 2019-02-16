@@ -19,7 +19,6 @@ fields:
         path: event_toolbar
         cssClass: collapse-visible
 secondaryTabs:
-    stretch: true
     fields:
         time_begin:
             label: 'hendrikerz.campaignr::lang.fields.begins_at'
@@ -51,6 +50,7 @@ secondaryTabs:
                 3: 'hendrikerz.campaignr::lang.fields.repeat_month'
                 4: 'hendrikerz.campaignr::lang.fields.repeat_year'
             span: auto
+            default: '2'
             hidden: 0
             trigger:
                 action: show
