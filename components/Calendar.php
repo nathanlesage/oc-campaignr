@@ -73,7 +73,7 @@ class Calendar extends \Cms\Classes\ComponentBase
         $this->page->campaignrMonth = $month;
         $this->page->campaignrYear = $year;
 
-        return Event::with(['featured_images'])->all();
+        return Event::with(['featured_images'])->get();
     }
 
     /**
