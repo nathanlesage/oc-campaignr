@@ -1,5 +1,10 @@
 {% set event = __SELF__.event %}
 
+{% if event.featured_images.count %}
+  {% for image in event.featured_images %}
+    <img src="{{ image.getPath() }}" alt="{{ image.title | default(image.file_name) }}" />
+  {% endfor %}
+{% endif %}
 <h1>{{ event.name }}</h1>
 <p class="campaignr-event-date">
   {% if event.repeat_event and event.repeat_mode > 0 %}
