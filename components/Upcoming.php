@@ -54,7 +54,7 @@ class Upcoming extends \Cms\Classes\ComponentBase
     // This array becomes available on the page as {{ component.events }}
     public function events()
     {
-        $events = Event::all();
+        $events = Event::with(['featured_images'])->all();
         $ret = [];
 
         // Only include those events that do occur in the future (either single
