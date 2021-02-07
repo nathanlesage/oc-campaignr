@@ -123,6 +123,7 @@ The `events` themselves contain the following properties (single events are avai
 - `location_city` City.
 - `location_country` Country.
 - `location_misc` Miscellaneous information (e.g. "The door is on the back of the house").
+- `featured_images` Featured images for the event.
 
 ## License
 
