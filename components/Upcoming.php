@@ -54,7 +54,11 @@ class Upcoming extends \Cms\Classes\ComponentBase
     // This array becomes available on the page as {{ component.events }}
     public function events()
     {
-        $events = Event::all();
+        // Make sure we only include single events in the future, or active repeating events.
+        $timestamp = Carbon::now();
+        $events = Event::where(function($query) use ($timestamp) {
+          $query->where('repeat_event', true)->where('end_repeat_on', '>=', $timestamp);
+        })->orWhere('time_begin', '>=', $timestamp)->get();
         $ret = [];
 
         // Only include those events that do occur in the future (either single
