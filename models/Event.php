@@ -62,6 +62,13 @@ class Event extends Model
     public $rules = [];
 
     /**
+     * @var array Allow attachment of featured images
+     */
+    public $attachMany = [
+      'featured_images' => ['System\Models\File', 'order' => 'sort_order']
+    ];
+
+    /**
      * Holds the next occurrence of this event, if the function getNextOccurrence
      * has been called and has returned true.
      * @var string

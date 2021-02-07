@@ -37,6 +37,7 @@ return [
             'misc_comment' => 'Additional information pertaining the location of the event.',
         ],
         'should_repeat' => 'Repeat?',
+        'featured_images' => 'Featured images',
     ],
     'components' => [
         'calendar' => [
