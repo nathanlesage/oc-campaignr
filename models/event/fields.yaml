@@ -18,6 +18,13 @@ fields:
         type: partial
         path: event_toolbar
         cssClass: collapse-visible
+    featured_images:
+        label: hendrikerz.campaignr::lang.fields.featured_images
+        type: fileupload
+        mode: image
+        imageWidth: 200
+        imageHeight: 200
+        tab: 'hendrikerz.campaignr::lang.fields.tab_details'
 secondaryTabs:
     fields:
         time_begin:

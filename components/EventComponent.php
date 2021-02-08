@@ -58,7 +58,7 @@ class EventComponent extends \Cms\Classes\ComponentBase
     // This array becomes available on the page as {{ component.event }}
     public function event()
     {
-        return Event::where('slug', $this->property('eventSlug'))->get()->first();
+        return Event::with(['featured_images'])->where('slug', $this->property('eventSlug'))->get()->first();
     }
 
 
