@@ -6,3 +6,5 @@
 1.0.2:
     - 'Make sure there is always a value for the repeat mode.'
     - update_event_table20190216.php
+1.0.3:
+    - 'Only take upcoming/repeating events for the Upcoming component.'
