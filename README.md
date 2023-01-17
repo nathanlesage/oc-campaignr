@@ -1,3 +1,5 @@
+> **This plugin is no longer maintained.**
+
 # Campaignr for October CMS
 
 Engage with your fans or raise awareness for a cause with this plugin. Campaignr provides to your company the ability to create and manage events and campaigns to spread your ideas.
